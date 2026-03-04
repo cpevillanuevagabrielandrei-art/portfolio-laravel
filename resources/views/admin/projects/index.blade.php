@@ -1,0 +1,87 @@
+@extends('layouts.admin')
+
+@section('page-title', 'Projects')
+
+@section('topbar-actions')
+    <a href="{{ route('admin.projects.create') }}" class="btn-admin btn-admin-primary">
+        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Add Project
+    </a>
+@endsection
+
+@section('content')
+
+<div class="admin-card">
+    @if($projects->isEmpty())
+        <div style="text-align:center;padding:3rem;color:var(--a-muted)">
+            <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" style="margin:0 auto 1rem;opacity:0.3"><path d="M2 17l10 5 10-5M2 12l10 5 10-5M12 2L2 7l10 5 10-5z"/></svg>
+            <p style="margin-bottom:1rem">No projects yet.</p>
+            <a href="{{ route('admin.projects.create') }}" class="btn-admin btn-admin-primary">Add your first project</a>
+        </div>
+    @else
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Project</th>
+                    <th>Links</th>
+                    <th>Order</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($projects as $project)
+                <tr>
+                    <td>
+                        <div style="display:flex;align-items:center;gap:0.875rem">
+                            <img src="{{ $project->image_url }}" alt="{{ $project->title }}"
+                                 style="width:56px;height:40px;object-fit:cover;border-radius:6px;border:1px solid var(--a-border);flex-shrink:0" />
+                            <div>
+                                <strong>{{ $project->title }}</strong>
+                                @if($project->description)
+                                    <br><small>{{ Str::limit($project->description, 55) }}</small>
+                                @endif
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div style="display:flex;gap:0.4rem;flex-wrap:wrap">
+                            @if($project->github_url)
+                                <a href="{{ $project->github_url }}" target="_blank" class="btn-admin btn-admin-outline btn-admin-sm">GitHub</a>
+                            @endif
+                            @if($project->live_url)
+                                <a href="{{ $project->live_url }}" target="_blank" class="btn-admin btn-admin-outline btn-admin-sm">Live</a>
+                            @endif
+                        </div>
+                    </td>
+                    <td style="font-family:var(--a-font-mono);font-size:0.8rem">{{ $project->sort_order }}</td>
+                    <td>
+                        @if($project->is_active)
+                            <span class="badge badge-success">Active</span>
+                        @else
+                            <span class="badge badge-secondary">Hidden</span>
+                        @endif
+                    </td>
+                    <td>
+                        <div style="display:flex;gap:0.4rem;align-items:center">
+                            <a href="{{ route('admin.projects.edit', $project) }}" class="btn-admin btn-admin-outline btn-admin-sm">
+                                <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                                Edit
+                            </a>
+                            <form method="POST" action="{{ route('admin.projects.destroy', $project) }}"
+                                  onsubmit="return confirm('Delete this project?')">
+                                @csrf @method('DELETE')
+                                <button type="submit" class="btn-admin btn-admin-danger btn-admin-sm">
+                                    <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/></svg>
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    @endif
+</div>
+
+@endsection

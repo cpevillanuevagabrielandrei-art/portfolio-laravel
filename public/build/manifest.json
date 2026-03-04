@@ -10,12 +10,12 @@
     "src": "resources/js/app.js"
   },
   "resources/sass/admin.scss": {
-    "file": "assets/admin-6f1bd84f.css",
+    "file": "assets/admin-06bf0feb.css",
     "isEntry": true,
     "src": "resources/sass/admin.scss"
   },
   "resources/sass/app.scss": {
-    "file": "assets/app-f5a9b779.css",
+    "file": "assets/app-aabf06fa.css",
     "isEntry": true,
     "src": "resources/sass/app.scss"
   }

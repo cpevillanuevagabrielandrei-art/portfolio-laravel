@@ -919,6 +919,17 @@ p { color: var(--a-muted-2); }
 }
 
 // ===========================
+// SETTINGS GRID
+// ===========================
+
+.settings-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    margin-bottom: 1.25rem;
+}
+
+// ===========================
 // SIDEBAR TOGGLE BUTTON
 // ===========================
 
@@ -945,6 +956,7 @@ p { color: var(--a-muted-2); }
         display: inline-flex !important;
     }
 
+    .settings-grid { grid-template-columns: 1fr; }
     .admin-form .form-row { grid-template-columns: 1fr; }
     .stats-grid { grid-template-columns: 1fr 1fr; }
     .admin-content { padding: 1.25rem; }

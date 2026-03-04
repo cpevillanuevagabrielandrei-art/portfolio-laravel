@@ -4,12 +4,12 @@ nixPkgs = ["php82", "php82Extensions.pdo", "php82Extensions.pdo_sqlite", "php82E
 [phases.install]
 cmds = [
     "composer install --no-dev --optimize-autoloader",
-    "npm install",
-    "node node_modules/vite/bin/vite.js build"
+    "npm install"
 ]
 
 [phases.build]
 cmds = [
+    "node node_modules/vite/bin/vite.js build",
     "php artisan config:cache",
     "php artisan view:cache",
     "php artisan route:cache"

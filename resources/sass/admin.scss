@@ -935,6 +935,18 @@ p { color: var(--a-muted-2); }
 
 #sidebarToggle {
     display: none !important;
+    background: var(--a-surface-2) !important;
+    border-color: var(--a-border-hover) !important;
+    color: var(--a-text) !important;
+    padding: 0.5rem 0.65rem !important;
+
+    svg {
+        display: block !important;
+        stroke: var(--a-text) !important;
+        color: var(--a-text) !important;
+        width: 18px !important;
+        height: 18px !important;
+    }
 }
 
 // ===========================
@@ -959,13 +971,13 @@ p { color: var(--a-muted-2); }
     .settings-grid { grid-template-columns: 1fr; }
     .admin-form .form-row { grid-template-columns: 1fr; }
     .stats-grid { grid-template-columns: 1fr 1fr; }
-    .admin-content { padding: 1.25rem; }
+    .admin-content { padding: 1.25rem; max-width: 100%; }
     .admin-topbar { padding: 0.875rem 1.25rem; }
 }
 
 @media (max-width: 640px) {
     .stats-grid { grid-template-columns: 1fr; }
-    .admin-content { padding: 1rem; width: 100%; }
+    .admin-content { padding: 1rem; width: 100%; max-width: 100%; }
     .admin-topbar {
         padding: 0.75rem 1rem;
         h1 { font-size: 0.875rem; }
@@ -973,9 +985,12 @@ p { color: var(--a-muted-2); }
     .login-card { margin: 1rem; padding: 2rem 1.5rem; }
     .message-meta-grid { grid-template-columns: 1fr; }
     .admin-table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
         font-size: 0.78rem;
-        th, td { padding: 0.6rem 0.5rem; }
+        th, td { padding: 0.6rem 0.5rem; white-space: nowrap; }
     }
     .admin-card { padding: 1rem; }
-    .topbar-actions .btn-admin span { display: none; }
+    .topbar-actions { gap: 0.4rem; }
 }

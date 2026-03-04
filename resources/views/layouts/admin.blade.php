@@ -13,7 +13,7 @@
 
     <div class="admin-wrapper">
 
-        {{-- Sidebar Overlay --}}
+        {{-- Overlay --}}
         <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
         {{-- Sidebar --}}
@@ -40,7 +40,6 @@
                     </span>
                     Dashboard
                 </a>
-
                 <a href="{{ route('admin.settings') }}"
                     class="{{ request()->routeIs('admin.settings') ? 'active' : '' }}">
                     <span class="nav-icon">
@@ -52,7 +51,6 @@
                     </span>
                     Profile & Settings
                 </a>
-
                 <a href="{{ route('admin.projects') }}"
                     class="{{ request()->routeIs('admin.projects*') ? 'active' : '' }}">
                     <span class="nav-icon">
@@ -63,7 +61,6 @@
                     </span>
                     Projects
                 </a>
-
                 <a href="{{ route('admin.skills') }}" class="{{ request()->routeIs('admin.skills*') ? 'active' : '' }}">
                     <span class="nav-icon">
                         <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"
@@ -74,7 +71,6 @@
                     </span>
                     Skills
                 </a>
-
                 <a href="{{ route('admin.messages') }}"
                     class="{{ request()->routeIs('admin.messages*') ? 'active' : '' }}">
                     <span class="nav-icon">
@@ -89,9 +85,7 @@
                         <span class="badge badge-danger" style="margin-left:auto">{{ $unread }}</span>
                     @endif
                 </a>
-
                 <div class="nav-divider"></div>
-
                 <a href="{{ route('portfolio.index') }}" target="_blank" style="opacity:0.65">
                     <span class="nav-icon">
                         <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"
@@ -128,10 +122,10 @@
         {{-- Main --}}
         <main class="admin-main">
             <div class="admin-topbar">
-                <div style="display:flex;align-items:center;gap:0.875rem">
-                    <button class="btn-admin btn-admin-outline btn-admin-sm" id="sidebarToggle">
-                        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
-                            viewBox="0 0 24 24">
+                <div class="topbar-left">
+                    <button class="sidebar-toggle-btn" id="sidebarToggle" type="button" aria-label="Toggle menu">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <line x1="3" y1="6" x2="21" y2="6" />
                             <line x1="3" y1="12" x2="21" y2="12" />
                             <line x1="3" y1="18" x2="21" y2="18" />
@@ -180,7 +174,6 @@
                         </ul>
                     </div>
                 @endif
-
                 @yield('content')
             </div>
         </main>
@@ -189,29 +182,36 @@
     @stack('scripts')
 
     <script>
-        const sidebar = document.getElementById('adminSidebar');
-        const overlay = document.getElementById('sidebarOverlay');
-        const toggle = document.getElementById('sidebarToggle');
+        (function() {
+            var sidebar = document.getElementById('adminSidebar');
+            var overlay = document.getElementById('sidebarOverlay');
+            var toggle = document.getElementById('sidebarToggle');
 
-        function openSidebar() {
-            sidebar.classList.add('open');
-            overlay.classList.add('open');
-        }
+            function openSidebar() {
+                sidebar.classList.add('open');
+                overlay.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            }
 
-        function closeSidebar() {
-            sidebar.classList.remove('open');
-            overlay.classList.remove('open');
-        }
+            function closeSidebar() {
+                sidebar.classList.remove('open');
+                overlay.classList.remove('open');
+                document.body.style.overflow = '';
+            }
 
-        toggle?.addEventListener('click', () => sidebar.classList.contains('open') ? closeSidebar() : openSidebar());
-        overlay?.addEventListener('click', closeSidebar);
-
-        // Close sidebar on nav link click (mobile)
-        sidebar?.querySelectorAll('nav a').forEach(link => {
-            link.addEventListener('click', () => {
-                if (window.innerWidth < 1024) closeSidebar();
+            if (toggle) toggle.addEventListener('click', function() {
+                sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
             });
-        });
+            if (overlay) overlay.addEventListener('click', closeSidebar);
+
+            if (sidebar) {
+                sidebar.querySelectorAll('nav a').forEach(function(link) {
+                    link.addEventListener('click', function() {
+                        if (window.innerWidth < 1024) closeSidebar();
+                    });
+                });
+            }
+        })();
     </script>
 
 </body>

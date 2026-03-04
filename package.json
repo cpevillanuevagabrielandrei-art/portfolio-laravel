@@ -1,8 +1,8 @@
 {
     "private": true,
     "scripts": {
-        "dev": "npx vite",
-        "build": "npx vite build",
+        "dev": "vite",
+        "build": "vite build",
         "sass": "sass resources/sass/app.scss public/css/app.css --watch",
         "sass:build": "sass resources/sass/app.scss public/css/app.css --style compressed"
     },

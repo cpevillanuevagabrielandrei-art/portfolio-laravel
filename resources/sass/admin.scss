@@ -923,7 +923,7 @@ p { color: var(--a-muted-2); }
 // ===========================
 
 #sidebarToggle {
-    display: none;
+    display: none !important;
 }
 
 // ===========================
@@ -933,43 +933,37 @@ p { color: var(--a-muted-2); }
 @media (max-width: 1024px) {
     .admin-sidebar {
         transform: translateX(-100%);
-
         &.open { transform: translateX(0); }
     }
 
-    .admin-main { margin-left: 0; }
+    .admin-main {
+        margin-left: 0 !important;
+        width: 100%;
+    }
 
-    #sidebarToggle { display: inline-flex; }
+    #sidebarToggle {
+        display: inline-flex !important;
+    }
 
     .admin-form .form-row { grid-template-columns: 1fr; }
-
     .stats-grid { grid-template-columns: 1fr 1fr; }
-
     .admin-content { padding: 1.25rem; }
-
     .admin-topbar { padding: 0.875rem 1.25rem; }
 }
 
 @media (max-width: 640px) {
     .stats-grid { grid-template-columns: 1fr; }
-
-    .admin-content { padding: 1rem; }
-
+    .admin-content { padding: 1rem; width: 100%; }
     .admin-topbar {
         padding: 0.75rem 1rem;
-        h1 { font-size: 0.9rem; }
+        h1 { font-size: 0.875rem; }
     }
-
     .login-card { margin: 1rem; padding: 2rem 1.5rem; }
-
     .message-meta-grid { grid-template-columns: 1fr; }
-
     .admin-table {
         font-size: 0.78rem;
         th, td { padding: 0.6rem 0.5rem; }
     }
-
     .admin-card { padding: 1rem; }
-
     .topbar-actions .btn-admin span { display: none; }
 }

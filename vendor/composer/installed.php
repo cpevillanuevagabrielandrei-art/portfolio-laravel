@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'portfolio/laravel-portfolio',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => null,
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => '17f596c56e26d0185a6933c0bb55814207c06f85',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -593,9 +593,9 @@
             'dev_requirement' => true,
         ),
         'portfolio/laravel-portfolio' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => null,
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '17f596c56e26d0185a6933c0bb55814207c06f85',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
